@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+
+    <title>Document</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"><b>Local Train Ticket System</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+          </ul>
+          <ul class="navbar-nav">
+              <li class="nav-item">
+                  <a class="nav-link">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link">Register</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+    {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <p>Please login to see this page.</p>
+    {% endif %}
+    {% endif %}
+
+    <!-- for signup -->
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+          <!-- Tabs Titles -->
+      
+          <!-- Icon -->
+          <div class="fadeIn first">
+            <h4 class="mt-2">User Registration</h4>
+          </div>
+      
+          <!-- signup Form -->
+          <form>
+            <input type="text" id="first_name" class="fadeIn second" name="first_name" placeholder="enter first name">
+            <input type="text" id="last_name" class="fadeIn second" name="last_name" placeholder="enter last name">
+            <input type="email" id="email" class="fadeIn second" name="email" placeholder="enter email address">
+            <input type="text" id="phone" class="fadeIn second" name="phone" placeholder="enter phone number">
+            <input type="password" id="password" class="fadeIn third" name="login" placeholder="enter password">
+            <input type="submit" class="fadeIn fourth" value="Sign Up">
+          </form>
+      
+          <!-- Remind login -->
+          <div id="formFooter">
+            Already have an account? <a class="underlineHover" href="{% url 'login' %}"> Login</a>
+          </div>
+      
+        </div>
+      </div>
+
+      <!-- signup end -->
+
+      <!-- footer -->
+      <footer class="bg-light text-center text-lg-start mt-2">
+        <!-- Copyright -->
+        <div class="text-center p-3 bg-dark" style="color:white;">
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+            All rights reserved by Team Squad
+        </div>
+        <!-- Copyright -->
+      </footer>
+
+</body>
+</html>
+
+<script src="/static/js/jquery-slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="/static/js/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="/static/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
