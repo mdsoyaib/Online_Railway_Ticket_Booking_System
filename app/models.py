@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 
+
 class CustomUser(AbstractUser):
     email = models.EmailField(max_length=100, blank=True, unique=True, null=True)
     phone = models.CharField(verbose_name=_("Mobile phone"), max_length=14, blank=True, null=True, unique=True)
