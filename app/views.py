@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
+# homepage view
 
 class Home(View):
     def get(self, request):
@@ -105,3 +106,17 @@ def user_login(request):
 
     response = render(request, 'login.html')
     return HttpResponse(response)
+
+
+# contact page view
+
+class Contact(View):
+    def get(self, request):
+        return render(request, 'contact.html')
+
+
+# feedback page view
+
+class Feedback(View):
+    def get(self, request):
+        return render(request, 'feedback.html')
