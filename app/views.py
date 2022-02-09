@@ -94,13 +94,6 @@ def user_login(request):
             password = request.POST['password']
 
             user = authenticate(username=username,password=password)
-            try:
-                if user.groups.filter(name='hotel_owner').exists():
-                    
-                    messages.error(request,"Incorrect username or Password")
-                    return redirect('login')
-            except:
-                pass
             
             if user is not None:
                 login(request,user)
@@ -112,14 +105,3 @@ def user_login(request):
 
     response = render(request, 'login.html')
     return HttpResponse(response)
-
-
-# logout for admin and user
-
-# def user_logout(request):
-#     if request.method =='GET':
-#         logout(request)
-#         messages.success(request,"Logged out successfully")
-#         return redirect('home')
-#     else:
-#         return redirect('login')
