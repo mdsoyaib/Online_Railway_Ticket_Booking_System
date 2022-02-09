@@ -27,9 +27,10 @@
             </div>
 
             <!-- Login Form -->
-            <form>
-                <input type="text" id="login" class="fadeIn second" name="login" placeholder="enter email">
-                <input type="password" id="password" class="fadeIn third" name="login" placeholder="enter password">
+            <form method="post" action="login">
+                {% csrf_token %}
+                <input type="text" id="email" class="fadeIn second" name="email" placeholder="enter email">
+                <input type="password" id="password" class="fadeIn third" name="password" placeholder="enter password">
                 <input type="submit" class="fadeIn fourth" value="Log In">
             </form>
 

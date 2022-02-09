@@ -1,7 +1,7 @@
  
   body {
     font-family: "Poppins", sans-serif;
-    height: 100vh;
+    height: 110vh;
   }
   
   a {
@@ -52,7 +52,7 @@
   #formFooter {
     background-color: #f6f6f6;
     border-top: 1px solid #dce8f1;
-    padding: 25px;
+    padding: 5px 25px 25px 25px;
     text-align: center;
     -webkit-border-radius: 0 0 10px 10px;
     border-radius: 0 0 10px 10px;

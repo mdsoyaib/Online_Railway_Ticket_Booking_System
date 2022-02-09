@@ -27,13 +27,17 @@
             </div>
 
             <!-- signup Form -->
-            <form>
+            <form method="post" action="signup">
+                {% csrf_token %}
                 <input type="text" id="first_name" class="fadeIn second" name="first_name"
                        placeholder="enter first name">
                 <input type="text" id="last_name" class="fadeIn second" name="last_name" placeholder="enter last name">
+                <input type="text" id="username" class="fadeIn second" name="username" placeholder="enter an username">
                 <input type="email" id="email" class="fadeIn second" name="email" placeholder="enter email address">
                 <input type="text" id="phone" class="fadeIn second" name="phone" placeholder="enter phone number">
-                <input type="password" id="password" class="fadeIn third" name="login" placeholder="enter password">
+                <input type="password" id="password1" class="fadeIn third" name="password1" placeholder="enter password">
+                <input type="password" id="password2" class="fadeIn third" name="password2" placeholder="confirm password">
+                <br/>
                 <input type="submit" class="fadeIn fourth" value="Sign Up">
             </form>
 
