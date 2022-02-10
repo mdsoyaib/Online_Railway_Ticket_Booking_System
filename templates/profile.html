@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    User Profile
+{% endblock title %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+
+        <div class="container emp-profile">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img src="https://www.nicepng.com/png/detail/72-729987_big-image-user-clipart-png.png"
+                                 alt=""/>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="padding-top:50px;">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Username</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{ user.username }}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Name</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{ user.first_name }} {{ user.last_name }}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Email</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{ user.email }}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Phone</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{ user.phone }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    {% endif %}
+
+{% endblock content %}

@@ -6,8 +6,43 @@
 
 {% block content %}
 
-    <div>
-        <h1>Feedback page</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center p-4 text-success">
+                <h4>User Feedbacks</h4>
+            </div>
+
+            <!-- this section is about the feedbacks -->
+
+            {% for feedback in feedback %}
+            <div class="col-lg-12 m-1">
+                <div class="card border border-white">
+                    <h6 class="card-header bg-white pb-0 text-primary">{{feedback.name}}</h6>
+                    <div class="card-body">
+                        <p class="card-title text-secondary pt-0">{{feedback.created_at}}</p>
+                        <p class="card-text text-success">{{feedback.feedback}}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- this section is for feedback comment box -->
+
+            <div class="col-lg-12 m-2">
+                <div class="card border border-info">
+                    <div class="card-body">
+                        <form method="post" action="feedback">
+                            {% csrf_token %}
+                            <h6 class="card-title">Comment your feedback: </h6>
+                            <!-- <input class="text-left" type="text" name="feedback" id="feedback" style="width: 100%;"
+                                   placeholder="write your feedback"> -->
+                            <textarea class="form-control" rows="5" id="feedback" name="feedback" placeholder="write your feedback"></textarea>
+                            <input type="submit" class="fourth ml-0 mt-2 mb-0" value="submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 {% endblock content %}

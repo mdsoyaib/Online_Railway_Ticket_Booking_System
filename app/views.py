@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from app.models import CustomUser
+from app.models import CustomUser, Feedback
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -117,6 +117,37 @@ class Contact(View):
 
 # feedback page view
 
-class Feedback(View):
+class Feedbacks(View):
     def get(self, request):
-        return render(request, 'feedback.html')
+        feedback = Feedback.objects.all().order_by('-id')
+        return render(request, 'feedback.html', {'feedback': feedback})
+
+    def post(self, request):
+        user = request.user
+        if user.is_authenticated:
+            comment = request.POST['feedback']
+
+            if comment == '':
+                messages.warning(request, "please write something first and then submit feedback.")
+                return redirect('feedback')
+            
+            else:
+                feedback = Feedback(name=user, feedback=comment)
+                feedback.save()
+                
+                return redirect('feedback')
+
+        else:
+            messages.warning(request, "Please login first to post feedback.")
+            return redirect('feedback')
+
+
+# profile page view for user
+
+class Profile(View):
+    def get(self, request):
+        user = request.user
+        if user.is_authenticated:
+            return render(request, 'profile.html')
+        else:
+            return redirect('login')
