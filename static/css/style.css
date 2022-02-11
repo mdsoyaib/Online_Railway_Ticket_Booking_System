@@ -110,7 +110,7 @@
     transform: scale(0.95);
   }
   
-  input[type=text], [type=password]{
+  #formContent input[type=text], input[type=password]{
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
@@ -131,7 +131,7 @@
     border-radius: 5px 5px 5px 5px;
   }
 
-  input[type=email] {
+  #formContent input[type=email] {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
@@ -152,7 +152,7 @@
     border-radius: 5px 5px 5px 5px;
   }
   
-  input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
+  #formContent input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
     background-color: #fff;
     border-bottom: 2px solid #5fbae9;
   }
