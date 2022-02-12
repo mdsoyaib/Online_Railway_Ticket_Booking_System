@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from app.models import CustomUser, Feedback, ContactForm
+from app.models import CustomUser, Feedback, ContactForm, ContactNumber
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -112,7 +112,8 @@ def user_login(request):
 
 class Contact(View):
     def get(self, request):
-        return render(request, 'contact.html')
+        contact = ContactNumber.objects.all()
+        return render(request, 'contact.html', {'contact': contact})
 
     def post(self, request):
         name = request.POST['name']
@@ -149,7 +150,7 @@ class Feedbacks(View):
             else:
                 feedback = Feedback(name=user.first_name + ' ' + user.last_name, feedback=comment)
                 feedback.save()
-                
+                messages.success(request, 'Thanks for your feedback!')
                 return redirect('feedback')
 
         else:
