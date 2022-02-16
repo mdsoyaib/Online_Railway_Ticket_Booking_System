@@ -6,8 +6,112 @@
 
 {% block content %}
 
-    <div>
-        <h1>Hello everyone!</h1>
+    <!-- this part is for finding train -->
+    <div class="" style="background-image: url('https://www.bproperty.com/blog/wp-content/uploads/Cover-31-1170x508.jpg'); background-repeat: no-repeat; background-size: cover;">
+        <div class="container">
+            <div class="row">
+
+                <!-- left part -->
+                <div class="col-lg-6 mt-5 mb-5">
+
+                </div>
+
+                <!-- right part -->
+                <div class="col-lg-6 mx-auto mt-5 mb-5">
+                    <div class="card bg-dark">
+                        <form>
+                            <div class="form-row m-2 mt-4">
+                              <div class="col">
+                                <label for="from" class="text-white">Route From:</label>
+                                <input type="text" class="form-control" placeholder="From" id="from" required>
+                              </div>
+                              <div class="col">
+                                <label for="to" class="text-white">Route To:</label>
+                                <input type="text" class="form-control" placeholder="To" id="to" required>
+                              </div>
+                            </div>
+
+                            <div class="form-row m-2 mt-4">
+                                <div class="col">
+                                    <label for="date" class="text-white">Date:</label>
+                                  <input type="date" class="form-control" placeholder="Date" id="date" required>
+                                </div>
+                                <div class="col">
+                                    <label for="class" class="text-white">Class:</label>
+                                  <input type="text" class="form-control" placeholder="Class" id="class" required>
+                                </div>
+                              </div>
+
+                              <div class="form-row m-2 mt-4">
+                                <div class="col">
+                                    <label for="pa" class="text-white">Passenger(Adult):</label>
+                                  <input type="number" class="form-control" placeholder="Adult" id="pa" required>
+                                </div>
+                                <div class="col">
+                                    <label for="pc" class="text-white">Passenger(Child):</label>
+                                  <input type="number" class="form-control" placeholder="Child" id="pc" required>
+                                </div>
+                              </div>
+
+                              <div class="form-row">
+                                <div class="col pl-0">
+                                  <input type="button" value="find" class="bg-info mb-4 mt-2">
+                                </div>
+                              </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- bottom informative part -->
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-4 mt-4 mb-4">
+                <div class="row">
+                    <div class="col-md-2 p-0">
+                        <i class="fas fa-tags fa-2x text-primary"></i>
+                    </div>
+                    <div class="col-md-10 card border-white p-0">
+                        <div class="card-body m-0 p-0">
+                            <h5 class="card-title">Get Train Tickets from the comfort of your home</h5>
+                            <p class="card-text">Book train tickets from anywhere using the robust ticketing platform exclusively built to provide the passengers with pleasant ticketing experience. Also check out the mobile app RailSheba to further extend your pleasure of booking train tickets.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mt-4 mb-4">
+                <div class="row">
+                    <div class="col-md-2 p-0">
+                        <i class="far fa-clock fa-2x text-primary"></i>
+                    </div>
+                    <div class="col-md-10 card border-white p-0">
+                        <div class="card-body m-0 p-0">
+                            <h5 class="card-title">Train & Ticketing related information at your fingertips</h5>
+                            <p class="card-text">Checkout available seats, route information, fare information on real time basis with Esheba Platform.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mt-4 mb-4">
+                <div class="row">
+                    <div class="col-md-2 p-0">
+                        <i class="fas fa-lock fa-2x text-primary"></i>
+                    </div>
+                    <div class="col-md-10 card border-white p-0">
+                        <div class="card-body m-0 p-0">
+                            <h5 class="card-title">Pay Securely</h5>
+                            <p class="card-text">Pay using your convenient payment option. Bangladesh Railway supports Visa, Master, Amex & Nexus Cards, Rocket and bKash Mobile Financial Services for your convenience.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
 {% endblock content %}
