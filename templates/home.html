@@ -7,27 +7,35 @@
 {% block content %}
 
     <!-- this part is for finding train -->
-    <div class="" style="background-image: url('https://www.bproperty.com/blog/wp-content/uploads/Cover-31-1170x508.jpg'); background-repeat: no-repeat; background-size: cover;">
+    <div class="" style="background-image: url('https://www.bproperty.com/blog/wp-content/uploads/Cover-31-1170x508.jpg'); background-repeat: no-repeat; background-size: cover; background-color:">
         <div class="container">
             <div class="row">
 
                 <!-- left part -->
-                <div class="col-lg-6 mt-5 mb-5">
-
+                <div class="col-lg-6 mt-5 mb-5 text-white" style="font-size: 35px;">
+                    <div class="pt-5">
+                        <div><p><b>Welcome To</b></p></div>
+                        <div><p><b>Local Train Ticket Project</b></p></div>
+                        <div><p>Developed By <b>Team Squad</b></p></div>
+                    </div>
                 </div>
 
                 <!-- right part -->
                 <div class="col-lg-6 mx-auto mt-5 mb-5">
                     <div class="card bg-dark">
-                        <form>
+                        <form autocomplete="off">
                             <div class="form-row m-2 mt-4">
                               <div class="col">
                                 <label for="from" class="text-white">Route From:</label>
-                                <input type="text" class="form-control" placeholder="From" id="from" required>
+                                <select name="from" id="from" class="form-control" required>
+                                    <option value="{{form.source}}"></option>
+                                </select>
                               </div>
                               <div class="col">
                                 <label for="to" class="text-white">Route To:</label>
-                                <input type="text" class="form-control" placeholder="To" id="to" required>
+                                <select name="to" id="to" class="form-control" required>
+                                    <option value="{{form.destination}}">{{form.destination}}</option>
+                                </select>
                               </div>
                             </div>
 

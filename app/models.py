@@ -24,12 +24,33 @@ class Station(models.Model):
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     def __str__(self):
+        return f"{self.name}, {self.place}"
+
+
+class ClassType(models.Model):
+    name = models.CharField(max_length=50, null=True, blank=True)
+    price = models.PositiveIntegerField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+class Train(models.Model):
+    name = models.CharField(verbose_name=_("Train Name"), max_length=255, null=True, blank=True)
+    nos = models.PositiveIntegerField(verbose_name=_("Number of Seat"), null=True, blank=True)
+    source = models.ForeignKey(Station, null=True, blank=True, on_delete=models.PROTECT, related_name='From+')
+    destination = models.ForeignKey(Station, null=True, blank=True, on_delete=models.PROTECT, related_name='To+')
+    departure_time = models.TimeField(null=True, blank=True)
+    arrival_time = models.TimeField(null=True, blank=True)
+    class_type = models.ManyToManyField(ClassType, null=True, blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+
+    def __str__(self):
         return self.name
-
-
-# class Train(models.Model):
-#     name = models.CharField(verbose_name=_("Train Name"), max_length=255, null=True, blank=True)
-    
 
 
 class Feedback(models.Model):

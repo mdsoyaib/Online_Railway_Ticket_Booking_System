@@ -4,6 +4,7 @@ from app.models import CustomUser, Feedback, ContactForm, ContactNumber
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from app.forms import TrainForm
 
 
 # Create your views here.
@@ -12,7 +13,8 @@ from django.contrib.auth import authenticate, login, logout
 
 class Home(View):
     def get(self, request):
-        return render(request, 'home.html')
+        form = TrainForm
+        return render(request, 'home.html', {'form': form})
 
 
 # signup for user
