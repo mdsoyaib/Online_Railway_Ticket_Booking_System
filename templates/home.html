@@ -23,7 +23,8 @@
                 <!-- right part -->
                 <div class="col-lg-6 mx-auto mt-5 mb-5">
                     <div class="card bg-dark">
-                        <form autocomplete="off">
+                        <form method="post" action="/">
+                            {% csrf_token %}
                             <div class="form-row m-2 mt-4">
                               <div class="col">
                                 <label for="from" class="text-white">Route From:</label>
@@ -34,36 +35,58 @@
                               <div class="col">
                                 <label for="to" class="text-white">Route To:</label>
                                 <select name="to" id="to" class="form-control" required>
-                                    <option value="{{form.destination}}">{{form.destination}}</option>
+                                    <option value="{{form.destination}}"></option>
                                 </select>
                               </div>
                             </div>
 
-                            <div class="form-row m-2 mt-4">
+                            <div class="form-row m-2 mt-2">
                                 <div class="col">
                                     <label for="date" class="text-white">Date:</label>
-                                  <input type="date" class="form-control" placeholder="Date" id="date" required>
+                                  <input type="date" name="date" class="form-control" placeholder="Date" id="date">
                                 </div>
                                 <div class="col">
-                                    <label for="class" class="text-white">Class:</label>
-                                  <input type="text" class="form-control" placeholder="Class" id="class" required>
+                                    <label for="type" class="text-white">Class:</label>
+                                    <select name="type" id="type" class="form-control" placeholer="Select" required>
+                                        <option value="{{form.class_type}}"></option>
+                                    </select>
                                 </div>
                               </div>
 
-                              <div class="form-row m-2 mt-4">
+                              <div class="form-row m-2 mt-2">
                                 <div class="col">
                                     <label for="pa" class="text-white">Passenger(Adult):</label>
-                                  <input type="number" class="form-control" placeholder="Adult" id="pa" required>
+                                    <select name="pa" id="pa" class="form-control" required>
+                                        <option selected>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
                                 </div>
                                 <div class="col">
                                     <label for="pc" class="text-white">Passenger(Child):</label>
-                                  <input type="number" class="form-control" placeholder="Child" id="pc" required>
+                                    <select name="pc" id="pc" class="form-control" required>
+                                        <option selected>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                              </div>
+
+                              <div class="form-row">
+                                <div class="col text-warning pl-3">
+                                    <p>You can book maximum 5 seat! *</p>
                                 </div>
                               </div>
 
                               <div class="form-row">
                                 <div class="col pl-0">
-                                  <input type="button" value="find" class="bg-info mb-4 mt-2">
+                                  <input type="submit" value="find" class="bg-info mb-4 mt-2">
                                 </div>
                               </div>
                         </form>

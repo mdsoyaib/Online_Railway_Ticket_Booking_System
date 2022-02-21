@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from app.models import CustomUser, Feedback, ContactForm, ContactNumber
+from app.models import CustomUser, Feedback, ContactForm, ContactNumber, Train
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -15,6 +15,36 @@ class Home(View):
     def get(self, request):
         form = TrainForm
         return render(request, 'home.html', {'form': form})
+
+    def post(self, request):
+        source = request.POST['from']
+        destination = request.POST['to']
+        date = request.POST['date']
+        class_type = request.POST['type']
+        adult = request.POST['pa']
+        child = request.POST['pc']
+
+        adult = int(adult)
+        child = int(child)
+
+        if source == '' or source == 'Select' or destination == '' or destination == 'Select' \
+                or date == '' or date == 'mm//dd//yyyy' or class_type == '':
+            messages.warning(request, 'Please fillup the form properly')
+            return redirect('home')
+
+        elif (adult + child) < 1:
+            messages.warning(request, 'Please book minimum 1 seat')
+            return redirect('home')
+
+        elif (adult + child) > 5:
+            messages.warning(request, 'You can book maximum 5 seat')
+            return redirect('home')
+
+        else:
+            print(source, destination, date, class_type, adult, child)
+            return redirect('home')
+
+        return redirect('home')
 
 
 # signup for user
