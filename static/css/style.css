@@ -376,3 +376,8 @@
 }
 
 /* end: css for profile page */
+
+.available{
+  height: 90vh;
+  width: 100%;
+}

@@ -34,7 +34,7 @@ class ClassType(models.Model):
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.name}"
+        return self.name
 
 
 class Train(models.Model):

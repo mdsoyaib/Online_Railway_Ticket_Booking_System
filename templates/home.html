@@ -7,7 +7,7 @@
 {% block content %}
 
     <!-- this part is for finding train -->
-    <div class="" style="background-image: url('https://www.bproperty.com/blog/wp-content/uploads/Cover-31-1170x508.jpg'); background-repeat: no-repeat; background-size: cover; background-color:">
+    <div class="" style="background-image: url('https://www.bproperty.com/blog/wp-content/uploads/Cover-31-1170x508.jpg'); background-repeat: no-repeat; background-size: cover;">
         <div class="container">
             <div class="row">
 
@@ -23,12 +23,12 @@
                 <!-- right part -->
                 <div class="col-lg-6 mx-auto mt-5 mb-5">
                     <div class="card bg-dark">
-                        <form method="post" action="/">
+                        <form role="search" action="available_train">
                             {% csrf_token %}
                             <div class="form-row m-2 mt-4">
                               <div class="col">
-                                <label for="from" class="text-white">Route From:</label>
-                                <select name="from" id="from" class="form-control" required>
+                                <label for="rfrom" class="text-white">Route From:</label>
+                                <select name="rfrom" id="rfrom" class="form-control" required>
                                     <option value="{{form.source}}"></option>
                                 </select>
                               </div>
@@ -46,8 +46,8 @@
                                   <input type="date" name="date" class="form-control" placeholder="Date" id="date">
                                 </div>
                                 <div class="col">
-                                    <label for="type" class="text-white">Class:</label>
-                                    <select name="type" id="type" class="form-control" placeholer="Select" required>
+                                    <label for="ctype" class="text-white">Class:</label>
+                                    <select name="ctype" id="ctype" class="form-control" required>
                                         <option value="{{form.class_type}}"></option>
                                     </select>
                                 </div>

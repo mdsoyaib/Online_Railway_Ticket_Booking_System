@@ -5,7 +5,7 @@ from app.models import Train
 class TrainForm(forms.ModelForm):
     class Meta:
         model = Train
-        fields = ('source', 'destination', 'class_type',)
+        fields = ('source', 'destination', 'class_type')
 
 
     def __init__(self, *args, **kwargs):
@@ -14,3 +14,9 @@ class TrainForm(forms.ModelForm):
         self.fields['source'].required = True
         self.fields['destination'].empty_label = "Select"
         self.fields['destination'].required = True
+
+
+# class ClassTypeForm(forms.ModelForm):
+#     class Meta:
+#         model = Feedback
+#         fields = ('name',)

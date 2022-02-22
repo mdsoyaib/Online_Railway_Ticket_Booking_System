@@ -16,35 +16,50 @@ class Home(View):
         form = TrainForm
         return render(request, 'home.html', {'form': form})
 
-    def post(self, request):
-        source = request.POST['from']
-        destination = request.POST['to']
-        date = request.POST['date']
-        class_type = request.POST['type']
-        adult = request.POST['pa']
-        child = request.POST['pc']
+    # def post(self, request):
+    #     source = request.POST['from']
+    #     destination = request.POST['to']
+    #     date = request.POST['date']
+    #     class_type = request.POST['type']
+    #     adult = request.POST['pa']
+    #     child = request.POST['pc']
 
-        adult = int(adult)
-        child = int(child)
+    #     adult = int(adult)
+    #     child = int(child)
 
-        if source == '' or source == 'Select' or destination == '' or destination == 'Select' \
-                or date == '' or date == 'mm//dd//yyyy' or class_type == '':
-            messages.warning(request, 'Please fillup the form properly')
-            return redirect('home')
+    #     if source == '' or source == 'Select' or destination == '' or destination == 'Select' \
+    #             or date == '' or date == 'mm//dd//yyyy' or class_type == '':
+    #         messages.warning(request, 'Please fillup the form properly')
+    #         return redirect('home')
 
-        elif (adult + child) < 1:
-            messages.warning(request, 'Please book minimum 1 seat')
-            return redirect('home')
+    #     elif (adult + child) < 1:
+    #         messages.warning(request, 'Please book minimum 1 seat')
+    #         return redirect('home')
 
-        elif (adult + child) > 5:
-            messages.warning(request, 'You can book maximum 5 seat')
-            return redirect('home')
+    #     elif (adult + child) > 5:
+    #         messages.warning(request, 'You can book maximum 5 seat')
+    #         return redirect('home')
 
-        else:
-            print(source, destination, date, class_type, adult, child)
-            return redirect('home')
+    #     else:
+    #         print(source, destination, date, class_type, adult, child)
+    #         return redirect('home')
 
-        return redirect('home')
+    #     return redirect('home')
+
+
+
+class AvailableTrain(View):
+    def get(self, request):
+        rfrom = request.GET.get('rfrom')
+        to = request.GET.get('to')
+        date = request.GET.get('date')
+        ctype = request.GET.get('ctype')
+        adult = request.GET.get('pa')
+        child = request.GET.get('pc')
+
+        search = Train.objects.filter(source=rfrom, destination=to, class_type=ctype)
+
+        return render(request, 'available_train.html', {'search': search})
 
 
 # signup for user
