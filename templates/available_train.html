@@ -6,34 +6,36 @@
 
 {% block content %}
 
+{% load custom_filter %}
+
 <div class="available">
-    <div class="row bg-success text-white p-3 mr-0 text-center">
+    <div class="row bg-primary text-white p-3 mr-0 text-center">
         <div class="col-lg-12 text-left pl-4">
             <h3>Results</h3>
         </div>
         <div class="col-lg-3">
             <h5>From:</h5>
-            {{request.get.rfrom}}
+            <h6>{{request.GET.rfrom}}</h6>
         </div>
         <div class="col-lg-3">
             <h5>To:</h5>
-            {{request.GET.to}}
+            <h6>{{request.GET.to}}</h6>
         </div>
         <div class="col-lg-2">
             <h5>Date:</h5>
-            {{request.get.date}}
+            <h6>{{request.GET.date}}</h6>
         </div>
         <div class="col-lg-2">
             <h5>Class Type:</h5>
-            {{request.GET.ctype}}
+            <h6>{{request.GET.ctype}}</h6>
         </div>
         <div class="col-lg-1">
             <h5>Adult:</h5>
-            {{request.GET.pa}}
+            <h6>{{request.GET.pa}}</h6>
         </div>
         <div class="col-lg-1">
             <h5>Child:</h5>
-            {{request.GET.pc}}
+            <h6>{{request.GET.pc}}</h6>
         </div>
     </div>
 
@@ -62,9 +64,9 @@
                         <th scope="row">{{search.name}}</th>
                         <td>{{search.departure_time}}</td>
                         <td>{{search.arrival_time}}</td>
-                        <td>duration</td>
-                        <td>price</td>
-                        <td><button type="submit" class="btn btn-primary pl-4 pr-4 pt-2 pb-2 text-white">Book</button></td>
+                        <td>{{search.arrival_time|duration:search.departure_time}}</td>
+                        <td>{{multiply}}</td>
+                        <td><button type="submit" class="btn btn-success pl-4 pr-4 pt-2 pb-2 text-white">Book</button></td>
                     </tr>
                     {% endfor %}
                     </tbody>

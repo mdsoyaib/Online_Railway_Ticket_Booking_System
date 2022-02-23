@@ -57,9 +57,26 @@ class AvailableTrain(View):
         adult = request.GET.get('pa')
         child = request.GET.get('pc')
 
-        search = Train.objects.filter(source=rfrom, destination=to, class_type=ctype)
+        adult = int(adult)
+        child = int(child)
 
-        return render(request, 'available_train.html', {'search': search})
+        if rfrom == '' or rfrom == 'Select' or to == '' or to == 'Select' \
+                or date == '' or date == 'mm//dd//yyyy' or ctype == '':
+            messages.warning(request, 'Please fillup the form properly')
+            return redirect('home')
+
+        elif (adult + child) < 1:
+            messages.warning(request, 'Please book minimum 1 seat')
+            return redirect('home')
+
+        elif (adult + child) > 5:
+            messages.warning(request, 'You can book maximum 5 seat')
+            return redirect('home')
+
+        else:
+            search = Train.objects.filter(source=rfrom, destination=to, class_type=ctype)
+            
+            return render(request, 'available_train.html', {'search': search})
 
 
 # signup for user
