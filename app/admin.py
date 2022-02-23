@@ -6,7 +6,11 @@ from app.models import CustomUser, Station, ClassType, Train, Feedback, ContactN
 admin.site.site_header = 'LTTP Admin Panel'
 
 admin.site.register(CustomUser)
-admin.site.register(Station)
+# admin.site.register(Station)
+@admin.register(Station)
+class StationAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'place')
+
 admin.site.register(ClassType)
 
 @admin.register(Train)

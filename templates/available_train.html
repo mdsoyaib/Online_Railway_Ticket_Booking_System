@@ -15,11 +15,11 @@
         </div>
         <div class="col-lg-3">
             <h5>From:</h5>
-            <h6>{{request.GET.rfrom}}</h6>
+            <h6>{{source.name}}, {{source.place}}</h6>
         </div>
         <div class="col-lg-3">
             <h5>To:</h5>
-            <h6>{{request.GET.to}}</h6>
+            <h6>{{destination.name}}, {{destination.place}}</h6>
         </div>
         <div class="col-lg-2">
             <h5>Date:</h5>
@@ -27,7 +27,7 @@
         </div>
         <div class="col-lg-2">
             <h5>Class Type:</h5>
-            <h6>{{request.GET.ctype}}</h6>
+            <h6>{{class_type.name}}</h6>
         </div>
         <div class="col-lg-1">
             <h5>Adult:</h5>
@@ -54,6 +54,7 @@
                         <th scope="col">Departure</th>
                         <th scope="col">Arrival</th>
                         <th scope="col">Duration</th>
+                        <th scope="col">Total Passenger</th>
                         <th scope="col">Fare</th>
                         <th scope="col">Book</th>
                     </tr>
@@ -65,6 +66,7 @@
                         <td>{{search.departure_time}}</td>
                         <td>{{search.arrival_time}}</td>
                         <td>{{search.arrival_time|duration:search.departure_time}}</td>
+                        <td>total</td>
                         <td>{{multiply}}</td>
                         <td><button type="submit" class="btn btn-success pl-4 pr-4 pt-2 pb-2 text-white">Book</button></td>
                     </tr>

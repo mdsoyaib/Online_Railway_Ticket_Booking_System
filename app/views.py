@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from app.models import CustomUser, Feedback, ContactForm, ContactNumber, Train
+from app.models import CustomUser, Feedback, ContactForm, ContactNumber, Train, Station, ClassType
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -76,7 +76,11 @@ class AvailableTrain(View):
         else:
             search = Train.objects.filter(source=rfrom, destination=to, class_type=ctype)
             
-            return render(request, 'available_train.html', {'search': search})
+            source = Station.objects.get(pk=rfrom)
+            destination = Station.objects.get(pk=to)
+            class_type = ClassType.objects.get(pk=ctype)
+            
+            return render(request, 'available_train.html', {'search': search, 'source':source, 'destination':destination, 'class_type':class_type})
 
 
 # signup for user
