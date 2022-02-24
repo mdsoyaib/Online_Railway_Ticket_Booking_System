@@ -16,72 +16,48 @@ class Home(View):
         form = TrainForm
         return render(request, 'home.html', {'form': form})
 
-    # def post(self, request):
-    #     source = request.POST['from']
-    #     destination = request.POST['to']
-    #     date = request.POST['date']
-    #     class_type = request.POST['type']
-    #     adult = request.POST['pa']
-    #     child = request.POST['pc']
-
-    #     adult = int(adult)
-    #     child = int(child)
-
-    #     if source == '' or source == 'Select' or destination == '' or destination == 'Select' \
-    #             or date == '' or date == 'mm//dd//yyyy' or class_type == '':
-    #         messages.warning(request, 'Please fillup the form properly')
-    #         return redirect('home')
-
-    #     elif (adult + child) < 1:
-    #         messages.warning(request, 'Please book minimum 1 seat')
-    #         return redirect('home')
-
-    #     elif (adult + child) > 5:
-    #         messages.warning(request, 'You can book maximum 5 seat')
-    #         return redirect('home')
-
-    #     else:
-    #         print(source, destination, date, class_type, adult, child)
-    #         return redirect('home')
-
-    #     return redirect('home')
-
-
+        
 # available train page view
 
 class AvailableTrain(View):
     def get(self, request):
-        rfrom = request.GET.get('rfrom')
-        to = request.GET.get('to')
-        date = request.GET.get('date')
-        ctype = request.GET.get('ctype')
-        adult = request.GET.get('pa')
-        child = request.GET.get('pc')
+        if request.GET:
 
-        adult = int(adult)
-        child = int(child)
+            rfrom = request.GET.get('rfrom')
+            to = request.GET.get('to')
+            date = request.GET.get('date')
+            ctype = request.GET.get('ctype')
+            adult = request.GET.get('pa')
+            child = request.GET.get('pc')
 
-        if rfrom == '' or rfrom == 'Select' or to == '' or to == 'Select' \
-                or date == '' or date == 'mm//dd//yyyy' or ctype == '':
-            messages.warning(request, 'Please fillup the form properly')
-            return redirect('home')
+            adult = int(adult)
+            child = int(child)
 
-        elif (adult + child) < 1:
-            messages.warning(request, 'Please book minimum 1 seat')
-            return redirect('home')
+            if rfrom == '' or rfrom == 'Select' or to == '' or to == 'Select' \
+                    or date == '' or date == 'mm//dd//yyyy' or ctype == '':
+                messages.warning(request, 'Please fillup the form properly')
+                return redirect('home')
 
-        elif (adult + child) > 5:
-            messages.warning(request, 'You can book maximum 5 seat')
-            return redirect('home')
+            elif (adult + child) < 1:
+                messages.warning(request, 'Please book minimum 1 seat')
+                return redirect('home')
+
+            elif (adult + child) > 5:
+                messages.warning(request, 'You can book maximum 5 seat')
+                return redirect('home')
+
+            else:
+                search = Train.objects.filter(source=rfrom, destination=to, class_type=ctype)
+                
+                source = Station.objects.get(pk=rfrom)
+                destination = Station.objects.get(pk=to)
+                class_type = ClassType.objects.get(pk=ctype)
+                
+                return render(request, 'available_train.html', {'search': search, 'source':source, 'destination':destination, 'class_type':class_type})
 
         else:
-            search = Train.objects.filter(source=rfrom, destination=to, class_type=ctype)
-            
-            source = Station.objects.get(pk=rfrom)
-            destination = Station.objects.get(pk=to)
-            class_type = ClassType.objects.get(pk=ctype)
-            
-            return render(request, 'available_train.html', {'search': search, 'source':source, 'destination':destination, 'class_type':class_type})
+            messages.warning(request, 'Find train first to get available train')
+            return redirect('home')
 
 
 # signup for user
