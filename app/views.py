@@ -47,6 +47,7 @@ class Home(View):
     #     return redirect('home')
 
 
+# available train page view
 
 class AvailableTrain(View):
     def get(self, request):

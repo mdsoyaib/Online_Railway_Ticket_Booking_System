@@ -66,8 +66,8 @@
                         <td>{{search.departure_time}}</td>
                         <td>{{search.arrival_time}}</td>
                         <td>{{search.arrival_time|duration:search.departure_time}}</td>
-                        <td>total</td>
-                        <td>{{multiply}}</td>
+                        <td>{{request.GET.pa|passengers:request.GET.pc}}</td>
+                        <td>{{request.GET.pa|passengers:request.GET.pc|multiply:class_type.price}}</td>
                         <td><button type="submit" class="btn btn-success pl-4 pr-4 pt-2 pb-2 text-white">Book</button></td>
                     </tr>
                     {% endfor %}

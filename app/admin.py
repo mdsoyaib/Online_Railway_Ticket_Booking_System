@@ -9,7 +9,7 @@ admin.site.register(CustomUser)
 # admin.site.register(Station)
 @admin.register(Station)
 class StationAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'place')
+    list_display = ('name', 'place')
 
 admin.site.register(ClassType)
 
