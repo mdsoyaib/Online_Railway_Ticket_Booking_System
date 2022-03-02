@@ -60,6 +60,35 @@ class AvailableTrain(View):
             return redirect('home')
 
 
+#Booking page view
+
+class Booking(View):
+    def get(self, request):
+        if request.GET:
+
+            user = request.user
+            if user.is_authenticated:
+                
+                train = request.GET.get('train')
+                source = request.GET.get('source')
+                destination = request.GET.get('destination')
+                date = request.GET.get('date')
+                departure = request.GET.get('departure')
+                tp = request.GET.get('tp')
+                pa = request.GET.get('pa')
+                pc = request.GET.get('pc')
+                ctype = request.GET.get('ctype')
+                total_fare = request.GET.get('total_fare')
+
+                fare_each = ClassType.objects.get(name=ctype)
+
+                return render(request, 'booking.html', {'train':train, 'source':source, 'destination':destination, 'date':date, 'departure':departure, 'tp':tp, 'pa':pa, 'pc':pc, 'ctype':ctype, 'total_fare':total_fare, 'fare_each':fare_each})
+            else:
+                return redirect('login')
+        else:
+            messages.warning(request, 'find a train first!')
+            return redirect('home')
+
 # signup for user
 
 def signup(request):

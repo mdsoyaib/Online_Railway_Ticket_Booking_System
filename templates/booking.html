@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Train Booking
+{% endblock title %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center p-4 text-success">
+                <h4>Confirm Booking</h4>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-6 p-1 pr-5 card">
+                        <h5 class="pb-4 mx-auto text-primary">Personal Info</h5>
+                        <h6>User Name: {{user.first_name}} {{user.last_name}}</h6>
+                        <label for="email"><h6>Email:</h6></label>
+                        <input class="form-control mb-2" type="email" name="email" id="email" value="{{user.email}}">
+                        <label for="email"><h6>Phone Number:</h6></label>
+                        <input class="form-control" type="text" name="phone" id="phone" value="{{user.phone}}">
+                    </div>
+                    <div class="col-lg-6 p-1 card bookinginfo">
+                        <h5 class="pb-4 mx-auto text-primary">Booking Info</h5>
+                        <h6>Train Name: {{train}}</h6>
+                        <h6>Source: {{source}}</h6>
+                        <h6>Destination: {{destination}}</h6>
+                        <h6>Travel Date: {{date}}</h6>
+                        <h6>Travel Time: {{departure}}</h6>
+                        <h6>Number of Passengers: {{tp}}</h6>
+                        <h6>Adult: {{pa}} Child: {{pc}}</h6>
+                        <h6>Class Type: {{ctype}}</h6>
+                        <h6>Fare Per Passenger: {{fare_each.price}}</h6>
+                        <h6>Total Fare: {{total_fare}}</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 pt-5 pb-5 pr-0">
+                <button class="btn btn-success" style="float: right;" type="submit">Confirm</button>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock content %}

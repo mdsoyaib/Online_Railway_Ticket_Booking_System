@@ -9,73 +9,76 @@
 {% load custom_filter %}
 
 <div class="available">
-    <div class="row bg-primary text-white p-3 mr-0 text-center">
-        <div class="col-lg-12 text-left pl-4">
-            <h3>Results</h3>
+    <form role="search" action="booking">
+        
+        <div class="row bg-primary text-white p-3 mr-0 text-center">
+            <div class="col-lg-12 text-left pl-4">
+                <h3>Results</h3>
+            </div>
+            <div class="col-lg-3">
+                <h5>From:</h5>
+                <h6><input type="hidden" name="source" value="{{source.name}}, {{source.place}}">{{source.name}}, {{source.place}}</h6>
+            </div>
+            <div class="col-lg-3">
+                <h5>To:</h5>
+                <h6><input type="hidden" name="destination" value="{{destination.name}}, {{destination.place}}">{{destination.name}}, {{destination.place}}</h6>
+            </div>
+            <div class="col-lg-2">
+                <h5>Date:</h5>
+                <h6><input type="hidden" name="date" value="{{request.GET.date}}">{{request.GET.date}}</h6>
+            </div>
+            <div class="col-lg-2">
+                <h5>Class Type:</h5>
+                <h6><input type="hidden" name="ctype" value="{{class_type.name}}">{{class_type.name}}</h6>
+            </div>
+            <div class="col-lg-1">
+                <h5>Adult:</h5>
+                <h6><input type="hidden" name="pa" value="{{request.GET.pa}}">{{request.GET.pa}}</h6>
+            </div>
+            <div class="col-lg-1">
+                <h5>Child:</h5>
+                <h6><input type="hidden" name="pc" value="{{request.GET.pc}}">{{request.GET.pc}}</h6>
+            </div>
         </div>
-        <div class="col-lg-3">
-            <h5>From:</h5>
-            <h6>{{source.name}}, {{source.place}}</h6>
-        </div>
-        <div class="col-lg-3">
-            <h5>To:</h5>
-            <h6>{{destination.name}}, {{destination.place}}</h6>
-        </div>
-        <div class="col-lg-2">
-            <h5>Date:</h5>
-            <h6>{{request.GET.date}}</h6>
-        </div>
-        <div class="col-lg-2">
-            <h5>Class Type:</h5>
-            <h6>{{class_type.name}}</h6>
-        </div>
-        <div class="col-lg-1">
-            <h5>Adult:</h5>
-            <h6>{{request.GET.pa}}</h6>
-        </div>
-        <div class="col-lg-1">
-            <h5>Child:</h5>
-            <h6>{{request.GET.pc}}</h6>
-        </div>
-    </div>
 
-    <!-- this section is about to see the available trains -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center p-4 text-success">
-                <h4>Available Trains</h4>
-            </div>
-            
-            <div class="col-lg-12 m-1">
-                <table class="table text-center">
-                    <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Train Name</th>
-                        <th scope="col">Departure</th>
-                        <th scope="col">Arrival</th>
-                        <th scope="col">Duration</th>
-                        <th scope="col">Total Passenger</th>
-                        <th scope="col">Fare</th>
-                        <th scope="col">Book</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {% for search in search %}
-                    <tr>
-                        <th scope="row">{{search.name}}</th>
-                        <td>{{search.departure_time}}</td>
-                        <td>{{search.arrival_time}}</td>
-                        <td>{{search.arrival_time|duration:search.departure_time}}</td>
-                        <td>{{request.GET.pa|passengers:request.GET.pc}}</td>
-                        <td>{{request.GET.pa|passengers:request.GET.pc|multiply:class_type.price}}</td>
-                        <td><button type="submit" class="btn btn-success pl-4 pr-4 pt-2 pb-2 text-white">Book</button></td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+        <!-- this section is about to see the available trains -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center p-4 text-success">
+                    <h4>Available Trains</h4>
+                </div>
+                
+                <div class="col-lg-12 m-1">
+                    <table class="table text-center">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Train Name</th>
+                            <th scope="col">Departure</th>
+                            <th scope="col">Arrival</th>
+                            <th scope="col">Duration</th>
+                            <th scope="col">Total Passenger</th>
+                            <th scope="col">Fare</th>
+                            <th scope="col">Book</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for search in search %}
+                        <tr>
+                            <th scope="row"><input type="hidden" name="train" value="{{search.name}}">{{search.name}}</th>
+                            <td><input type="hidden" name="departure" value="{{search.departure_time}}">{{search.departure_time}}</td>
+                            <td>{{search.arrival_time}}</td>
+                            <td>{{search.arrival_time|duration:search.departure_time}}</td>
+                            <td><input type="hidden" name="tp" value="{{request.GET.pa|passengers:request.GET.pc}}">{{request.GET.pa|passengers:request.GET.pc}}</td>
+                            <td><input type="hidden" name="total_fare" value="{{request.GET.pa|passengers:request.GET.pc|multiply:class_type.price}}">{{request.GET.pa|passengers:request.GET.pc|multiply:class_type.price}}</td>
+                            <td><button type="submit" class="btn btn-success pl-4 pr-4 pt-2 pb-2 text-white">Book</button></td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 
 {% endblock content %}
