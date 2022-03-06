@@ -89,6 +89,10 @@ class Booking(View):
             messages.warning(request, 'find a train first!')
             return redirect('home')
 
+    def post(self, request):
+        messages.success(request, 'Congratulation! Your booking is successfull')
+        return redirect('booking')
+
 # signup for user
 
 def signup(request):

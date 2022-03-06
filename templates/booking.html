@@ -7,42 +7,79 @@
 {% block content %}
 
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center p-4 text-success">
-                <h4>Confirm Booking</h4>
-            </div>
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-lg-12 text-center p-4 text-success">
+                    <h4>Confirm Booking</h4>
+                </div>
 
-            <div class="col-lg-12">
-                <div class="row">
-                    <div class="col-lg-6 p-1 pr-5 card">
-                        <h5 class="pb-4 mx-auto text-primary">Personal Info</h5>
-                        <h6>User Name: {{user.first_name}} {{user.last_name}}</h6>
-                        <label for="email"><h6>Email:</h6></label>
-                        <input class="form-control mb-2" type="email" name="email" id="email" value="{{user.email}}">
-                        <label for="email"><h6>Phone Number:</h6></label>
-                        <input class="form-control" type="text" name="phone" id="phone" value="{{user.phone}}">
-                    </div>
-                    <div class="col-lg-6 p-1 card bookinginfo">
-                        <h5 class="pb-4 mx-auto text-primary">Booking Info</h5>
-                        <h6>Train Name: {{train}}</h6>
-                        <h6>Source: {{source}}</h6>
-                        <h6>Destination: {{destination}}</h6>
-                        <h6>Travel Date: {{date}}</h6>
-                        <h6>Travel Time: {{departure}}</h6>
-                        <h6>Number of Passengers: {{tp}}</h6>
-                        <h6>Adult: {{pa}} Child: {{pc}}</h6>
-                        <h6>Class Type: {{ctype}}</h6>
-                        <h6>Fare Per Passenger: {{fare_each.price}}</h6>
-                        <h6>Total Fare: {{total_fare}}</h6>
+                <div class="col-lg-12">
+                    <div class="row">
+                        <!-- personal info part -->
+                        <div class="col-lg-6 p-1 pr-5 card">
+                            <h5 class="pb-4 mx-auto text-primary">Personal Info</h5>
+                            <h6>User Name: {{user.first_name}} {{user.last_name}}</h6>
+                            <label for="email"><h6>Email:</h6></label>
+                            <input class="form-control mb-2" type="email" name="email" id="email" value="{{user.email}}">
+                            <label for="email"><h6>Phone Number:</h6></label>
+                            <input class="form-control" type="text" name="phone" id="phone" value="{{user.phone}}">
+                        </div>
+                        <!-- booking info part -->
+                        <div class="col-lg-6 p-1 card bookinginfo">
+                            <h5 class="pb-4 mx-auto text-primary">Booking Info</h5>
+                            <h6>Train Name: {{train}}</h6>
+                            <h6>Source: {{source}}</h6>
+                            <h6>Destination: {{destination}}</h6>
+                            <h6>Travel Date: {{date}}</h6>
+                            <h6>Travel Time: {{departure}}</h6>
+                            <h6>Number of Passengers: {{tp}}</h6>
+                            <h6>Adult: {{pa}} Child: {{pc}}</h6>
+                            <h6>Class Type: {{ctype}}</h6>
+                            <h6>Fare Per Passenger: {{fare_each.price}}</h6>
+                            <h6>Total Fare: {{total_fare}}</h6>
+                        </div>
                     </div>
                 </div>
+
+                <div class="col-lg-12 pt-5 pb-5 pr-0 booking-button">
+                    <input type="button" id="myBtn" value="Pay Now">
+                </div>
+
             </div>
 
-            <div class="col-lg-12 pt-5 pb-5 pr-0">
-                <button class="btn btn-success" style="float: right;" type="submit">Confirm</button>
-            </div>
+            <!-- Payment Modal HTML -->
 
-        </div>
+            <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content row">
+                    <div class="col-lg-12 text-center text-success">
+                        <span class="close">&times;</span>
+                        <h4>Please complete your payment</h4>
+                    </div>
+                    <div class="col-lg-12 pl-4 pt-4 text-muted">
+                        <h6>You have to pay total: {{total_fare}} Taka</h6>
+                        <h6>Pay to this number: +8801700000001</h6>
+                    </div>
+                    <div class="col-lg-12 pl-4 pt-2">
+                        <h6>Select a Payment Method:</h6>
+                        <input type="radio" name="ptype" id="bkash" value="bkash">
+                        <label for="bkash">Bkash</label><br>
+                        <input type="radio" name="ptype" id="rocket" value="rocket">
+                        <label for="rocket">Rocket</label><br>
+                        <input type="radio" name="ptype" id="nagad" value="nagad">
+                        <label for="nagad">Nagad</label><br>
+                        <label for="phone">Enter the phone number:</label>
+                        <input type="text" class="form-control" name="phone" id="phone" placeholder="enter the phone number from which you are doing payment">
+                        <label for="trxid">Enter transaction id:</label>
+                        <input type="text" class="form-control" name="trxid" id="trxid" placeholder="enter your payment transaction id">
+                        <button type="submit" class="btn btn-success float-right mt-4">Confirm</button>
+                    </div>
+
+                </div>
+            </div>
+        </form>
     </div>
 
 {% endblock content %}
