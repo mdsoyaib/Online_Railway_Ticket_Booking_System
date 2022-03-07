@@ -53,6 +53,72 @@ class Train(models.Model):
         return self.name
 
 
+class Booking(models.Model):
+    status = (
+        ("Pending", "Pending"),
+        ("Accepted", "Accepted"),
+        ("Canceled", "Canceled"),
+    )
+    user = models.ForeignKey(CustomUser, null=True, blank=True, on_delete=models.PROTECT)
+    booking_date = models.DateField(auto_now_add=True, null=True, blank=True)
+    booking_time = models.TimeField(auto_now_add=True, null=True, blank=True)
+    status = models.CharField(max_length=50, default='Pending', choices=status, auto_created=True, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+
+
+class BookingDetail(models.Model):
+    booking = models.OneToOneField(Booking, null=True, blank=True, on_delete=models.CASCADE)
+    train = models.CharField(max_length=255, null=True, blank=True)
+    source = models.CharField(max_length=255, null=True, blank=True)
+    destination = models.CharField(max_length=255, null=True, blank=True)
+    travel_date = models.DateField(null=True, blank=True)
+    travel_time = models.TimeField(null=True, blank=True)
+    nop = models.PositiveIntegerField(verbose_name=_("Number of Passengers"), null=True, blank=True)
+    adult = models.PositiveIntegerField(null=True, blank=True)
+    child = models.PositiveIntegerField(null=True, blank=True)
+    class_type = models.CharField(max_length=255, null=True, blank=True)
+    fpp = models.PositiveIntegerField(verbose_name=_("Fare Per Passenger"), null=True, blank=True)
+    total_fare = models.PositiveIntegerField(null=True, blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+
+
+class BillingInfo(models.Model):
+    booking = models.OneToOneField(Booking, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.PROTECT, null=True, blank=True)
+    email = models.EmailField(max_length=100, null=True, blank=True)
+    phone = models.CharField(max_length=255, null=True, blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+
+
+class Payment(models.Model):
+    status = (
+        ("Paid", "Paid"),
+        ("Unpaid", "Unpaid"),
+    )
+    booking = models.OneToOneField(Booking, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.PROTECT, null=True, blank=True)
+    pay_amount = models.PositiveIntegerField(null=True, blank=True)
+    pay_method = models.CharField(max_length=25, null=True, blank=True)
+    phone = models.CharField(max_length=14, null=True, blank=True)
+    trxid = models.CharField(max_length=255, null=True, blank=True, verbose_name=_("Transaction Id"))
+    status = models.CharField(max_length=50, default='Unpaid', choices=status, auto_created=True, null=True, blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+
+
+class Ticket(models.Model):
+    booking = models.ForeignKey(Booking, on_delete=models.CASCADE, null=True, blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
+
+
 class Feedback(models.Model):
     name = models.CharField(verbose_name=_("user name"), max_length=255, null=True, blank=True)
     feedback = models.TextField(null=True, blank=True)
