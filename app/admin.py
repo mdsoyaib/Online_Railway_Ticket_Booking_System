@@ -1,5 +1,6 @@
 from django.contrib import admin
-from app.models import CustomUser, Station, ClassType, Train, Feedback, ContactNumber, ContactForm
+from app.models import CustomUser, Station, ClassType, Train, Booking, BookingDetail, \
+    BillingInfo, Payment, Ticket, Feedback, ContactNumber, ContactForm
 
 # Register your models here.
 
@@ -21,6 +22,11 @@ class TrainAdmin(admin.ModelAdmin):
     def get_class_type(self, obj):
         return "\n".join([c.name for c in obj.class_type.all()])
 
+admin.site.register(Booking)
+admin.site.register(BookingDetail)
+admin.site.register(BillingInfo)
+admin.site.register(Payment)
+admin.site.register(Ticket)
 admin.site.register(Feedback)
 admin.site.register(ContactNumber)
 admin.site.register(ContactForm)

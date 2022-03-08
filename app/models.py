@@ -81,7 +81,8 @@ class BookingDetail(models.Model):
     fpp = models.PositiveIntegerField(verbose_name=_("Fare Per Passenger"), null=True, blank=True)
     total_fare = models.PositiveIntegerField(null=True, blank=True)
 
-    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    travel_dt = models.DateTimeField(blank=True, null=True)
+    booking_dt = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
 
@@ -114,6 +115,17 @@ class Payment(models.Model):
 
 class Ticket(models.Model):
     booking = models.ForeignKey(Booking, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.PROTECT, null=True, blank=True)
+    phone = models.CharField(max_length=14, null=True, blank=True)
+    source = models.CharField(max_length=255, null=True, blank=True)
+    destination = models.CharField(max_length=255, null=True, blank=True)
+    departure = models.TimeField(null=True, blank=True)
+    arrival = models.TimeField(null=True, blank=True)
+    travel_date = models.DateField(null=True, blank=True)
+    train_name = models.CharField(max_length=255, null=True, blank=True)
+    class_type = models.CharField(max_length=255, null=True, blank=True)
+    fare = models.PositiveIntegerField(null=True, blank=True)
+    ticket_id = models.CharField(max_length=255, null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
