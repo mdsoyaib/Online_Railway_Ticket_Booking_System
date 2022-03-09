@@ -64,7 +64,7 @@
                 {% if not user.is_superuser %}
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
-                    <a class="dropdown-item" href="#">Purchase History</a>
+                    <a class="dropdown-item" href="{% url 'booking_history' %}">Booking History</a>
                 </div>
 
                 {% endif %}

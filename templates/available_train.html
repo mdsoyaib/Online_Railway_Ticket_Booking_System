@@ -66,7 +66,7 @@
                         <tr>
                             <th scope="row"><input type="hidden" name="train" value="{{search.name}}">{{search.name}}</th>
                             <td><input type="hidden" name="departure" value="{{search.departure_time}}">{{search.departure_time}}</td>
-                            <td>{{search.arrival_time}}</td>
+                            <td><input type="hidden" name="arrival" value="{{search.arrival_time}}">{{search.arrival_time}}</td>
                             <td>{{search.arrival_time|duration:search.departure_time}}</td>
                             <td><input type="hidden" name="tp" value="{{request.GET.pa|passengers:request.GET.pc}}">{{request.GET.pa|passengers:request.GET.pc}}</td>
                             <td><input type="hidden" name="total_fare" value="{{request.GET.pa|passengers:request.GET.pc|multiply:class_type.price}}">{{request.GET.pa|passengers:request.GET.pc|multiply:class_type.price}}</td>

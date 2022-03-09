@@ -28,16 +28,17 @@
                         <!-- booking info part -->
                         <div class="col-lg-6 p-1 card bookinginfo">
                             <h5 class="pb-4 mx-auto text-primary">Booking Info</h5>
-                            <h6>Train Name: {{train}}</h6>
-                            <h6>Source: {{source}}</h6>
-                            <h6>Destination: {{destination}}</h6>
-                            <h6>Travel Date: {{date}}</h6>
-                            <h6>Travel Time: {{departure}}</h6>
-                            <h6>Number of Passengers: {{tp}}</h6>
-                            <h6>Adult: {{pa}} Child: {{pc}}</h6>
-                            <h6>Class Type: {{ctype}}</h6>
-                            <h6>Fare Per Passenger: {{fare_each.price}}</h6>
-                            <h6>Total Fare: {{total_fare}}</h6>
+                            <h6>Train Name: {{train}}<input type="hidden" name="train" value="{{train}}"></h6>
+                            <h6>Source: {{source}}<input type="hidden" name="source" value="{{source}}"></h6>
+                            <h6>Destination: {{destination}}<input type="hidden" name="destination" value="{{destination}}"></h6>
+                            <h6>Travel Date: {{date}}<input type="hidden" name="travel_date" value="{{date}}"></h6>
+                            <h6>Travel Time: {{departure}}<input type="hidden" name="departure" value="{{departure}}"></h6>
+                            <h6>Reaching Time: {{arrival}}<input type="hidden" name="arrival" value="{{arrival}}"></h6>
+                            <h6>Number of Passengers: {{tp}}<input type="hidden" name="tp" value="{{tp}}"></h6>
+                            <h6>Adult: {{pa}} Child: {{pc}}<input type="hidden" name="pa" value="{{pa}}"><input type="hidden" name="pc" value="{{pc}}"></h6>
+                            <h6>Class Type: {{ctype}}<input type="hidden" name="ctype" value="{{ctype}}"></h6>
+                            <h6>Fare Per Passenger: {{fare_each.price}}<input type="hidden" name="fpp" value="{{fare_each.price}}"></h6>
+                            <h6>Total Fare: {{total_fare}}<input type="hidden" name="total_fare" value="{{total_fare}}"></h6>
                         </div>
                     </div>
                 </div>
@@ -71,7 +72,7 @@
                         <input type="radio" name="ptype" id="nagad" value="nagad">
                         <label for="nagad">Nagad</label><br>
                         <label for="phone">Enter the phone number:</label>
-                        <input type="text" class="form-control" name="phone" id="phone" placeholder="enter the phone number from which you are doing payment">
+                        <input type="text" class="form-control" name="pay_phone" id="phone" placeholder="enter the phone number from which you are doing payment">
                         <label for="trxid">Enter transaction id:</label>
                         <input type="text" class="form-control" name="trxid" id="trxid" placeholder="enter your payment transaction id">
                         <button type="submit" class="btn btn-success float-right mt-4">Confirm</button>

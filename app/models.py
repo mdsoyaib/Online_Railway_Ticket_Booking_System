@@ -97,17 +97,13 @@ class BillingInfo(models.Model):
 
 
 class Payment(models.Model):
-    status = (
-        ("Paid", "Paid"),
-        ("Unpaid", "Unpaid"),
-    )
     booking = models.OneToOneField(Booking, on_delete=models.CASCADE, null=True, blank=True)
     user = models.ForeignKey(CustomUser, on_delete=models.PROTECT, null=True, blank=True)
     pay_amount = models.PositiveIntegerField(null=True, blank=True)
     pay_method = models.CharField(max_length=25, null=True, blank=True)
     phone = models.CharField(max_length=14, null=True, blank=True)
     trxid = models.CharField(max_length=255, null=True, blank=True, verbose_name=_("Transaction Id"))
-    status = models.CharField(max_length=50, default='Unpaid', choices=status, auto_created=True, null=True, blank=True)
+    status = models.CharField(max_length=50, default='Paid', auto_created=True, null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
@@ -120,12 +116,10 @@ class Ticket(models.Model):
     source = models.CharField(max_length=255, null=True, blank=True)
     destination = models.CharField(max_length=255, null=True, blank=True)
     departure = models.TimeField(null=True, blank=True)
-    arrival = models.TimeField(null=True, blank=True)
     travel_date = models.DateField(null=True, blank=True)
     train_name = models.CharField(max_length=255, null=True, blank=True)
     class_type = models.CharField(max_length=255, null=True, blank=True)
     fare = models.PositiveIntegerField(null=True, blank=True)
-    ticket_id = models.CharField(max_length=255, null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)

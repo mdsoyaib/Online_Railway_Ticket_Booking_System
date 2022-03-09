@@ -23,7 +23,11 @@ class TrainAdmin(admin.ModelAdmin):
         return "\n".join([c.name for c in obj.class_type.all()])
 
 admin.site.register(Booking)
-admin.site.register(BookingDetail)
+# admin.site.register(BookingDetail)
+@admin.register(BookingDetail)
+class BookingDetailAdmin(admin.ModelAdmin):
+    list_display = ('travel_date', 'travel_time', 'travel_dt')
+    
 admin.site.register(BillingInfo)
 admin.site.register(Payment)
 admin.site.register(Ticket)
