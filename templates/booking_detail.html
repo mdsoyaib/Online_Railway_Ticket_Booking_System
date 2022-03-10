@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    User Booking Details
+{% endblock title %}
+
+{% block content %}
+
+    
+<div class="row">
+    <div class="col-lg-12 text-center p-4 text-success">
+        <h4>Booking Details of Booking No: {{booking_detail.booking.id}}</h4>
+    </div>
+
+    <!-- this section is about the booking details -->
+
+    <div class="col-lg-12 mx-auto">
+        <div class="row">
+            <div class="col-lg-12 m-1 text-center text-info">
+                <h5>Booking Detail</h5>
+            </div>
+            <div class="col-lg-12 mt-2 mb-2 mx-auto">
+                <table class="table table-hover">
+                    <thead class="bg-dark text-white text-center">
+                      <tr>
+                        <th scope="col">Train Name</th>
+                        <th scope="col">Source</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Travel Date</th>
+                        <th scope="col">Travel Time</th>
+                        <th scope="col">Total Passenger</th>
+                        <th scope="col">Adult</th>
+                        <th scope="col">Child</th>
+                        <th scope="col">Class Type</th>
+                        <th scope="col">Fare Each</th>
+                        <th scope="col">Total Fare</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="text-center">
+                        <td>{{booking_detail.train}}</td>
+                        <td>{{booking_detail.source}}</td>
+                        <td>{{booking_detail.destination}}</td>
+                        <td>{{booking_detail.travel_date}}</td>
+                        <td>{{booking_detail.travel_time}}</td>
+                        <td>{{booking_detail.nop}}</td>
+                        <td>{{booking_detail.adult}}</td>
+                        <td>{{booking_detail.child}}</td>
+                        <td>{{booking_detail.class_type}}</td>
+                        <td>{{booking_detail.fpp}}</td>
+                        <td>{{booking_detail.total_fare}}</td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12 mx-auto">
+        <div class="row">
+            <div class="col-lg-12 text-center text-info">
+                <h5>Billing Info</h5>
+            </div>
+            <div class="col-lg-12 mt-2 mb-2 mx-auto">
+                <table class="table table-hover">
+                    <thead class="bg-dark text-white text-center">
+                      <tr>
+                        <th scope="col">User</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="text-center">
+                        <td>{{billing.user.username}}</td>
+                        <td>{{billing.email}}</td>
+                        <td>{{billing.phone}}</td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12 mx-auto">
+        <div class="row">
+            <div class="col-lg-12 text-center text-info">
+                <h5>Payment Detail</h5>
+            </div>
+            <div class="col-lg-12 mt-2 mb-2 mx-auto">
+                <table class="table table-hover">
+                    <thead class="bg-dark text-white text-center">
+                      <tr>
+                        <th scope="col">User</th>
+                        <th scope="col">Pay Amount</th>
+                        <th scope="col">Payment Method</th>
+                        <th scope="col">Pay Phone Number</th>
+                        <th scope="col">Transaction ID</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="text-center">
+                        <th scope="row">{{payment.user.username}}</th>
+                        <td>{{payment.pay_amount}}</td>
+                        <td>{{payment.pay_method}}</td>
+                        <td>{{payment.phone}}</td>
+                        <td>{{payment.trxid}}</td>
+                        <td>{{payment.status}}</td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+    
+
+{% endblock content %}

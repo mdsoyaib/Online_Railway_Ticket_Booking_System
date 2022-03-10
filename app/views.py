@@ -5,8 +5,8 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from app.forms import TrainForm
-
 import datetime
+
 
 # Create your views here.
 
@@ -183,8 +183,27 @@ class BookingHistory(View):
     def get(self, request):
         user = request.user
         if user.is_authenticated:
-            booking = Booking.objects.filter(user=user)
+            booking = Booking.objects.filter(user=user).order_by('-id')
             return render(request, 'booking_history.html', {'booking':booking})
+        else:
+            return redirect('login')
+
+
+# booking detail page view
+
+class BookingDetails(View):
+    def get(self, request, pk):
+        user = request.user
+        if user.is_authenticated:
+            bookings = Booking.objects.get(id=pk)
+            if user == bookings.user:
+                booking_detail = BookingDetail.objects.get(booking=pk)
+                billing = BillingInfo.objects.get(booking=pk)
+                payment = Payment.objects.get(booking=pk)
+                return render(request, 'booking_detail.html', {'booking_detail':booking_detail, 'billing':billing, 'payment':payment})
+            else:
+                messages.warning(request, "check your booking id")
+                return redirect('booking_history')
         else:
             return redirect('login')
 

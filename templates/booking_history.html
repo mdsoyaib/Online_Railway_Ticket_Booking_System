@@ -12,7 +12,7 @@
         <h4>Your Bookings</h4>
     </div>
 
-    <!-- this section is about the feedbacks -->
+    <!-- this section is about the bookings -->
 
     <div class="col-lg-12 m-1 mx-auto">
         <table class="table table-hover">
@@ -21,16 +21,22 @@
                 <th scope="col">Booking ID</th>
                 <th scope="col">Booking Date</th>
                 <th scope="col">Booking Time</th>
-                <th scope="col">Status</th>
+                <th scope="col">Booking Status</th>
+                <th scope="col">Booking Details</th>
+                <th scope="col">Ticket</th>
+                <th scope="col">Cancel Booking</th>
               </tr>
             </thead>
             <tbody>
                 {% for booking in booking %}
-              <tr>
+              <tr class="text-center">
                 <th scope="row">{{booking.id}}</th>
-                <td class="text-center">{{booking.booking_date}}</td>
-                <td class="text-center">{{booking.booking_time}}</td>
-                <td class="text-center">{{booking.status}}</td>
+                <td>{{booking.booking_date}}</td>
+                <td>{{booking.booking_time}}</td>
+                <td>{{booking.status}}</td>
+                <td><button type="submit" class="btn btn-info"><a href="booking_history/booking_detail/{{booking.id}}" class="text-white" style="text-decoration: none;">View Details</a></button></td>
+                <td><button type="submit" class="btn btn-success">Get Ticket</button></td>
+                <td><button type="submit" class="btn btn-danger">Cancel Booking</button></td>
               </tr>
               {% endfor %}
             </tbody>
