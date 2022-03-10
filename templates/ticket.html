@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    User Tickets
+{% endblock title %}
+
+{% block content %}
+    
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-lg-12 text-center p-4 text-success">
+            <h4>Your Train Tickets</h4>
+        </div>
+
+        <!-- this section is about the tickets -->
+        {% for ticket in ticket %}
+        <div class="col-lg-12 mx-auto mb-4 border border-success">
+            <div class="row">
+                <!-- ticket left part -->
+                <div class="col-lg-8 mx-auto">
+                    <div class="row">
+                        <div class="col-lg-12 bg-success text-white border border-dark border-left-0 border-top-0 border-bottom-0">
+                            <div class="row">
+                                <div class="col-lg-8 text-center">
+                                    <h5>Local Train Ticket Project Ticket</h5>
+                                </div>
+                                <div class="col-lg-4 text-right">
+                                    <h5>TID: {{ticket.id}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 border border-dark border-left-0 border-bottom-0 border-top-0 pt-2 pb-2">
+                            <div class="row">
+                                <div class="col-lg-6 mx-auto">
+                                    <h6>Passenger Name:<br>{{ticket.user.first_name}} {{ticket.user.last_name}}</h6>
+                                    <h6>Phone Number:<br>{{ticket.phone}}</h6>
+                                    <h6>Travel Date:<br>{{ticket.travel_date}}</h6>
+                                    <h6>Travel Time:<br>{{ticket.departure}}</h6>
+                                </div>
+                                <div class="col-lg-6 mx-auto">
+                                    <h6>Train Name:<br>{{ticket.train_name}}</h6>
+                                    <h6>From:<br>{{ticket.source}}</h6>
+                                    <h6>To:<br>{{ticket.destination}}</h6>
+                                    <h6>Class Type:<br>{{ticket.class_type}}</h6>
+                                    <h6>Fare:<br>{{ticket.fare}}</h6>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ticket right part -->
+                <div class="col-lg-4 mx-auto">
+                    <div class="row">
+                        <div class="col-lg-12 mx-auto bg-success text-white">
+                            <div class="row">
+                                <div class="col-lg-8 text-center">
+                                    <h5>LTTP Ticket</h5>
+                                </div>
+                                <div class="col-lg-4 text-right">
+                                    <h5>TID: {{ticket.id}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 mx-auto pt-2 pb-2">
+                            <h6>Passenger Name:<br>{{ticket.user.first_name}} {{ticket.user.last_name}}</h6>
+                            <h6>Travel Date: {{ticket.travel_date}}</h6>
+                            <h6>Travel Time: {{ticket.departure}}</h6>
+                            <h6>From:<br>{{ticket.source}}</h6>
+                            <h6>To:<br>{{ticket.destination}}</h6>
+                            <h6>Class Type: {{ticket.class_type}}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+    
+{% endblock content %}

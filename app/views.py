@@ -202,7 +202,22 @@ class BookingDetails(View):
                 payment = Payment.objects.get(booking=pk)
                 return render(request, 'booking_detail.html', {'booking_detail':booking_detail, 'billing':billing, 'payment':payment})
             else:
-                messages.warning(request, "check your booking id")
+                messages.warning(request, "Invalid booking id!")
+                return redirect('booking_history')
+        else:
+            return redirect('login')
+
+
+class Tickets(View):
+    def get(self, request, pk):
+        user = request.user
+        if user.is_authenticated:
+            bookings = Booking.objects.get(id=pk)
+            if user == bookings.user:
+                ticket = Ticket.objects.filter(booking=bookings)
+                return render(request, 'ticket.html', {'ticket':ticket})
+            else:
+                messages.warning(request, 'Invalid booking id!')
                 return redirect('booking_history')
         else:
             return redirect('login')
