@@ -155,7 +155,7 @@ class Bookings(View):
 
         booking = Booking(user=user)
         
-        booking_detail = BookingDetail(booking=booking, train=train, source=source, destination=destination, travel_date=travel_date, nop=nop, adult=adult, child=child, class_type=class_type, fpp=fpp, total_fare=total_fare, travel_time=str(travel_time))
+        booking_detail = BookingDetail(booking=booking, train=train, source=source, destination=destination, travel_date=travel_date, nop=nop, adult=adult, child=child, class_type=class_type, fpp=fpp, total_fare=total_fare, travel_time=str(travel_time), travel_dt=str(travel_date)+ ' '+ str(travel_time))
         
         billing_info = BillingInfo(booking=booking, user=user, email=email, phone=phone)
         
