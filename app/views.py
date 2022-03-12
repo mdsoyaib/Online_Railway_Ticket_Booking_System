@@ -6,6 +6,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from app.forms import TrainForm
 import datetime
+# from django.template.loader import get_template
+# from xhtml2pdf import pisa
 
 
 # Create your views here.
@@ -208,6 +210,8 @@ class BookingDetails(View):
             return redirect('login')
 
 
+# ticket page view
+
 class Tickets(View):
     def get(self, request, pk):
         user = request.user
@@ -215,12 +219,47 @@ class Tickets(View):
             bookings = Booking.objects.get(id=pk)
             if user == bookings.user:
                 ticket = Ticket.objects.filter(booking=bookings)
-                return render(request, 'ticket.html', {'ticket':ticket})
+                return render(request, 'ticket.html', {'ticket':ticket, 'bookings':bookings})
             else:
                 messages.warning(request, 'Invalid booking id!')
                 return redirect('booking_history')
         else:
             return redirect('login')
+
+
+# create pdf view
+
+# class TicketPdf(View):
+#     def get(self, request, pk, qk):
+#         user = request.user
+#         if user.is_authenticated:
+#             bookings = Booking.objects.get(id=pk)
+#             if user == bookings.user:
+#                 ticket = Ticket.objects.filter(booking=bookings)
+
+#                 template_path = 'ticket_pdf.html'
+#                 context = {'ticket':ticket}
+#                 # Create a Django response object, and specify content_type as pdf or csv
+#                 response = HttpResponse(content_type='application/pdf')
+#                 response['Content-Disposition'] = 'filename="ticket.pdf"'
+#                 # find the template and render it.
+#                 template = get_template(template_path)
+#                 html = template.render(context)
+
+#                 # create a pdf
+#                 pisa_status = pisa.CreatePDF(
+#                 html, dest=response)
+#                 # if error then show some funy view
+#                 if pisa_status.err:
+#                     return HttpResponse('We had some errors <pre>' + html + '</pre>')
+#                 return response
+
+#             else:
+#                 messages.warning(request, 'Invalid booking id!')
+#                 return redirect('booking_history')
+#         else:
+#             return redirect('login')
+
 
 # signup for user
 
