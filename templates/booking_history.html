@@ -36,7 +36,13 @@
                 <td>{{booking.status}}</td>
                 <td><button type="submit" class="btn btn-info"><a href="booking_history/booking_detail/{{booking.id}}" class="text-white" style="text-decoration: none;">View Details</a></button></td>
                 <td><button type="submit" class="btn btn-success"><a href="booking_history/ticket/{{booking.id}}" class="text-white" style="text-decoration: none;" target="_blank">Get Ticket</a></button></td>
-                <td><button type="submit" class="btn btn-danger">Cancel Booking</button></td>
+                <form action="cancel_booking" method="post">
+                  {% csrf_token %}
+                  
+                  <td><button type="submit" class="btn btn-danger">Cancel Booking</button></td>
+                  <input type="hidden" name="booking_id" value="{{booking.pk}}">
+                  
+                </form>
               </tr>
               {% endfor %}
             </tbody>

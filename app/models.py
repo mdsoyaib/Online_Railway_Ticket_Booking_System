@@ -63,6 +63,7 @@ class Booking(models.Model):
     booking_date = models.DateField(auto_now_add=True, null=True, blank=True)
     booking_time = models.TimeField(auto_now_add=True, null=True, blank=True)
     status = models.CharField(max_length=50, default='Pending', choices=status, auto_created=True, null=True, blank=True)
+    travel_dt = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 

@@ -20,6 +20,13 @@ def multiply(price, passenger):
 @register.filter(name="duration")
 def duration(departure, arrival):
     sub = datetime.combine(date.min, departure) - datetime.combine(date.min, arrival)
-    return sub                                                                         
+    return sub  
+
+
+# this filter is for subtracting two dates
+# @register.filter(name="date")
+# def date(travel_dt, created_at):
+#     sub = datetime.combine(date.min, int(travel_dt)) - datetime.combine(date.min, int(created_at))
+#     return sub                                                                         
 
 

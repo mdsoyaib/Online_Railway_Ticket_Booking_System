@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Verify Ticket
+{% endblock title %}
+
+{% block content %}
+
+    <div class="container verify_ticket">
+        <div class="row">
+            <div class="col-lg-12 text-center p-4 text-success">
+                <h4>Verify Your Ticket</h4>
+            </div>
+
+            <!-- this section is about the form to check ticket -->
+
+            <div class="col-lg-12 mt-2 mb-2">
+                <div class="row">
+                    <div class="col-lg-10 bg-secondary pt-3 pb-4 text-white mx-auto">
+                        <form role="search" action="verify_ticket">
+                            <div class="row">   
+                                <div class="col-lg-3">
+                                    <label for="train">Train Name: </label>
+                                    <select name="train" id="train" class="form-control" required>
+                                        <option default value="">Select</option>
+                                        {% for train in train %}
+                                        <option value="{{train.name}}">{{train.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label for="date">Travel Date: </label>
+                                    <input class="form-control" type="date" name="date" id="date" required>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label for="tid">Ticket ID: </label>
+                                    <input class="form-control" type="text" name="tid" id="tid" placeholder="enter your ticket id" required>
+                                </div>
+                                <div class="col-lg-3">
+                                    <button type="submit" class="btn btn-success mt-2 ml-4 p-4">Check Ticket</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- this is section is for gettting verification result -->
+
+            {% if request.GET %}
+            {% if request.GET.train == ticket.train_name and request.GET.tid == ticket.id and request.GET.date == ticket.travel_date %}
+
+            <div class="col-lg-12 pt-4 text-center">
+                <h4>Ticket Verification Result:</h4>
+                <h6>Train Name: {{request.GET.train_name}} | Travel Date: {{request.GET.date}} | Ticket ID: {{request.GET.tid}}</h6>
+            </div>
+            <div class="col-lg-12 pt-4 text-success text-center">
+                <h1><i class="fa-solid fa-circle-check"></i></h1>
+                <h3>This ticket is verified.</h3>
+            </div>
+            {% else %}
+            <div class="col-lg-12 pt-4 text-center">
+                <h4>Ticket Verification Result:</h4>
+                <h6>Train Name: {{request.GET.train}} | Travel Date: {{request.GET.date}} | Ticket ID: {{request.GET.tid}}</h6>
+            </div>
+            <div class="col-lg-12 pt-4 text-danger text-center">
+                <h1><i class="fa-solid fa-circle-xmark"></i></h1>
+                <h3>This ticket is not verified.</h3>
+            </div>
+
+            {% endif %}    
+            {% endif %}
+          
+        </div>
+    </div>
+
+{% endblock content %}

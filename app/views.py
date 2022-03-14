@@ -152,10 +152,10 @@ class Bookings(View):
         # dt = datetime.strftime("YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ]", '2022-04-10 14:30:20')
         # print(dt)
 
-
-        booking = Booking(user=user)
         
-        booking_detail = BookingDetail(booking=booking, train=train, source=source, destination=destination, travel_date=travel_date, nop=nop, adult=adult, child=child, class_type=class_type, fpp=fpp, total_fare=total_fare, travel_time=str(travel_time), travel_dt=str(travel_date)+ ' '+ str(travel_time))
+        booking = Booking(user=user, travel_dt=str(travel_date)+ ' ' + str(travel_time))
+
+        booking_detail = BookingDetail(booking=booking, train=train, source=source, destination=destination, travel_date=travel_date, nop=nop, adult=adult, child=child, class_type=class_type, fpp=fpp, total_fare=total_fare, travel_time=str(travel_time), travel_dt=str(travel_date)+ ' ' + str(travel_time))
         
         billing_info = BillingInfo(booking=booking, user=user, email=email, phone=phone)
         
@@ -185,7 +185,7 @@ class BookingHistory(View):
     def get(self, request):
         user = request.user
         if user.is_authenticated:
-            booking = Booking.objects.filter(user=user).order_by('-id')
+            booking = Booking.objects.filter(user=user).order_by('-id') 
             return render(request, 'booking_history.html', {'booking':booking})
         else:
             return redirect('login')
@@ -260,6 +260,15 @@ class Tickets(View):
 #         else:
 #             return redirect('login')
 
+
+# cancel booking view
+
+class CancelBooking(View):
+    def post(self, request):
+        id = request.POST['booking_id']
+        Booking.objects.filter(id=id).delete()
+        messages.success(request, 'Your booking canceled successfully')
+        return redirect(request.META['HTTP_REFERER'])
 
 # signup for user
 
@@ -402,6 +411,66 @@ class Feedbacks(View):
         else:
             messages.warning(request, "Please login first to post feedback.")
             return redirect('feedback')
+
+
+# verify ticket page view
+
+class VerifyTicket(View):
+    def get(self, request):
+        trains = Train.objects.all()
+        if request.GET:
+
+            train = request.GET.get('train')
+            date = request.GET.get('date')
+            tid = request.GET.get('tid')
+
+            tid = str(tid)
+            date = str(date)
+
+            ticket = None
+
+            try:
+                ticket = Ticket.objects.get(id=tid, train_name=train, travel_date=date)
+                ticket.id = str(ticket.id)
+                ticket.travel_date = str(ticket.travel_date)
+                return render(request, 'verify_ticket.html', {'train':trains, 'ticket':ticket})
+
+            except:
+                ticket = None
+                return render(request, 'verify_ticket.html', {'train':trains, 'ticket':ticket})
+            
+        else:
+            return render(request, 'verify_ticket.html', {'train':trains})
+
+        return render(request, 'verify_ticket.html', {'train':trains})
+
+
+class VerifyResult(View):
+    def get(self, request):
+        if request.GET:
+
+            train = request.GET.get('train')
+            date = request.GET.get('date')
+            tid = request.GET.get('tid')
+
+            tid = str(tid)
+            date = str(date)
+
+            ticket = None
+
+            try:
+                ticket = Ticket.objects.get(id=tid, train_name=train, travel_date=date)
+                ticket.id = str(ticket.id)
+                ticket.travel_date = str(ticket.travel_date)
+                return render(request, 'verify_result.html', {'ticket':ticket})
+
+            except:
+                ticket = None
+                return render(request, 'verify_result.html', {'ticket':ticket})
+            
+        else:
+            messages.warning(request, 'Check ticket first to get result')
+            return redirect('verify_ticket')
 
 
 # profile page view for user

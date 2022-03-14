@@ -33,6 +33,10 @@
             <li class="{% if request.path == url %}active{% endif %}">
                 <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
             </li>
+            {% url 'verify_ticket' as url %}
+            <li class="{% if request.path == url %}active{% endif %}">
+                <a class="nav-link" href="{% url 'verify_ticket' %}">Verify Ticket<span class="sr-only"></a>
+            </li>
             {% url 'feedback' as url %}
             <li class="{% if request.path == url %}active{% endif %}">
                 <a class="nav-link" href="{% url 'feedback' %}">User Feedbacks</a>

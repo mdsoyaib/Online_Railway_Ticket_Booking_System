@@ -447,3 +447,8 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+
+.verify_ticket {
+  height: 95vh;
+}
