@@ -445,34 +445,6 @@ class VerifyTicket(View):
         return render(request, 'verify_ticket.html', {'train':trains})
 
 
-class VerifyResult(View):
-    def get(self, request):
-        if request.GET:
-
-            train = request.GET.get('train')
-            date = request.GET.get('date')
-            tid = request.GET.get('tid')
-
-            tid = str(tid)
-            date = str(date)
-
-            ticket = None
-
-            try:
-                ticket = Ticket.objects.get(id=tid, train_name=train, travel_date=date)
-                ticket.id = str(ticket.id)
-                ticket.travel_date = str(ticket.travel_date)
-                return render(request, 'verify_result.html', {'ticket':ticket})
-
-            except:
-                ticket = None
-                return render(request, 'verify_result.html', {'ticket':ticket})
-            
-        else:
-            messages.warning(request, 'Check ticket first to get result')
-            return redirect('verify_ticket')
-
-
 # profile page view for user
 
 class Profile(View):

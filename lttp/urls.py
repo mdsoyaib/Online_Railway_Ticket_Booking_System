@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app.views import Home, AvailableTrain, user_login, signup, Contact, Feedbacks, Profile, Bookings, BookingHistory, BookingDetails, Tickets, CancelBooking, VerifyTicket, VerifyResult
+from app.views import Home, AvailableTrain, user_login, signup, Contact, Feedbacks, Profile, Bookings, BookingHistory, BookingDetails, Tickets, CancelBooking, VerifyTicket
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -31,7 +31,6 @@ urlpatterns = [
     path('contact', Contact.as_view(), name="contact"),
     path('feedback', Feedbacks.as_view(), name="feedback"),
     path('verify_ticket', VerifyTicket.as_view(), name="verify_ticket"),
-    path('verify_result', VerifyResult.as_view(), name="verify_result"),
 
     path('login', user_login, name="login"),
     path('signup', signup, name="signup"),
