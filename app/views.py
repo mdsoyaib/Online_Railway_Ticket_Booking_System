@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from app.forms import TrainForm
-import datetime
+from datetime import timezone, datetime, timedelta
 # from django.template.loader import get_template
 # from xhtml2pdf import pisa
 
@@ -129,7 +129,7 @@ class Bookings(View):
             x = int(x)
             if not y == 'a.m.':
                 x = x + 12
-            travel_time = datetime.timedelta(hours = x)
+            travel_time = timedelta(hours = x)
 
         elif travel_time == 'noon':
             travel_time = '12 p.m.'
@@ -137,7 +137,7 @@ class Bookings(View):
             x = time[0]
             y = time[1]
             x = int(x)
-            travel_time = datetime.timedelta(hours = x)
+            travel_time = timedelta(hours = x)
 
         else:
             time = travel_time.split()
@@ -146,14 +146,14 @@ class Bookings(View):
             x = int(x)
             if not y == 'a.m.':
                 x = x + 12
-            travel_time = datetime.timedelta(hours = x)        
+            travel_time = timedelta(hours = x)        
         # travel_time logic end
         
         # dt = datetime.strftime("YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ]", '2022-04-10 14:30:20')
         # print(dt)
 
         
-        booking = Booking(user=user, travel_dt=str(travel_date)+ ' ' + str(travel_time))
+        booking = Booking(user=user, travel_dt=str(travel_date)+ ' ' + str(travel_time), travel_date=travel_date)
 
         booking_detail = BookingDetail(booking=booking, train=train, source=source, destination=destination, travel_date=travel_date, nop=nop, adult=adult, child=child, class_type=class_type, fpp=fpp, total_fare=total_fare, travel_time=str(travel_time), travel_dt=str(travel_date)+ ' ' + str(travel_time))
         
@@ -185,8 +185,11 @@ class BookingHistory(View):
     def get(self, request):
         user = request.user
         if user.is_authenticated:
-            booking = Booking.objects.filter(user=user).order_by('-id') 
-            return render(request, 'booking_history.html', {'booking':booking})
+            booking = Booking.objects.filter(user=user).order_by('-id')
+
+            current_date = datetime.now(timezone.utc)
+            
+            return render(request, 'booking_history.html', {'booking':booking, 'current_date':current_date})
         else:
             return redirect('login')
 
@@ -269,6 +272,7 @@ class CancelBooking(View):
         Booking.objects.filter(id=id).delete()
         messages.success(request, 'Your booking canceled successfully')
         return redirect(request.META['HTTP_REFERER'])
+
 
 # signup for user
 

@@ -6,7 +6,8 @@
 
 {% block content %}
 
-    
+{% load custom_filter_date %}
+
 <div class="row mb-4">
     <div class="col-lg-12 text-center p-4 text-success">
         <h4>Your Bookings</h4>
@@ -38,10 +39,12 @@
                 <td><button type="submit" class="btn btn-success"><a href="booking_history/ticket/{{booking.id}}" class="text-white" style="text-decoration: none;" target="_blank">Get Ticket</a></button></td>
                 <form action="cancel_booking" method="post">
                   {% csrf_token %}
-                  
+                  {% with date=booking.travel_dt|date:current_date %}
+                  {% if date > 1 %}
                   <td><button type="submit" class="btn btn-danger">Cancel Booking</button></td>
                   <input type="hidden" name="booking_id" value="{{booking.pk}}">
-                  
+                  {% endif %}
+                  {% endwith %}
                 </form>
               </tr>
               {% endfor %}
