@@ -65,16 +65,16 @@
                     </div>
                     <div class="col-lg-12 pl-4 pt-2">
                         <h6>Select a Payment Method:</h6>
-                        <input type="radio" name="ptype" id="bkash" value="bkash">
+                        <input type="radio" name="ptype" id="bkash" value="bkash" required>
                         <label for="bkash">Bkash</label><br>
-                        <input type="radio" name="ptype" id="rocket" value="rocket">
+                        <input type="radio" name="ptype" id="rocket" value="rocket" required>
                         <label for="rocket">Rocket</label><br>
-                        <input type="radio" name="ptype" id="nagad" value="nagad">
+                        <input type="radio" name="ptype" id="nagad" value="nagad" required>
                         <label for="nagad">Nagad</label><br>
                         <label for="phone">Enter the phone number:</label>
-                        <input type="text" class="form-control" name="pay_phone" id="phone" placeholder="enter the phone number from which you are doing payment">
+                        <input type="text" class="form-control" name="pay_phone" id="phone" placeholder="enter the phone number from which you are doing payment" required>
                         <label for="trxid">Enter transaction id:</label>
-                        <input type="text" class="form-control" name="trxid" id="trxid" placeholder="enter your payment transaction id">
+                        <input type="text" class="form-control" name="trxid" id="trxid" placeholder="enter your payment transaction id" required>
                         <button type="submit" class="btn btn-success float-right mt-4">Confirm</button>
                     </div>
 
