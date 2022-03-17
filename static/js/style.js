@@ -1,3 +1,5 @@
+// js code for pop up window
+
 // Get the modal
 var modal = document.getElementById("myModal");
 
@@ -23,3 +25,5 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+// js code for pop up window end
