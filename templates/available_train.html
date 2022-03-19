@@ -7,6 +7,7 @@
 {% block content %}
 
 {% load custom_filter %}
+{% load custom_filter_date %}
 
 <div class="available">
     <form role="search" action="booking">
@@ -70,7 +71,13 @@
                             <td>{{search.arrival_time|duration:search.departure_time}}</td>
                             <td><input type="hidden" name="tp" value="{{request.GET.pa|passengers:request.GET.pc}}">{{request.GET.pa|passengers:request.GET.pc}}</td>
                             <td><input type="hidden" name="total_fare" value="{{request.GET.pa|passengers:request.GET.pc|multiply:class_type.price}}">{{request.GET.pa|passengers:request.GET.pc|multiply:class_type.price}}</td>
-                            <td><button type="submit" class="btn btn-success pl-4 pr-4 pt-2 pb-2 text-white">Book</button></td>
+                            <td>
+                                {{request.GET.date|add:search.departure_time}}
+                                {{request.GET.date|add:search.departure_time|book:current_date}}
+                                <button type="submit" class="btn btn-success pl-4 pr-4 pt-2 pb-2 text-white">Book</button>
+               
+                                
+                            </td>
                         </tr>
                         {% endfor %}
                         </tbody>

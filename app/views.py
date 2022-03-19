@@ -6,8 +6,6 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from app.forms import TrainForm
 from datetime import timezone, datetime, timedelta
-# from django.template.loader import get_template
-# from xhtml2pdf import pisa
 
 
 # Create your views here.
@@ -55,8 +53,10 @@ class AvailableTrain(View):
                 source = Station.objects.get(pk=rfrom)
                 destination = Station.objects.get(pk=to)
                 class_type = ClassType.objects.get(pk=ctype)
+
+                current_date = datetime.now(timezone.utc)
                 
-                return render(request, 'available_train.html', {'search': search, 'source':source, 'destination':destination, 'class_type':class_type})
+                return render(request, 'available_train.html', {'search': search, 'source':source, 'destination':destination, 'class_type':class_type, 'current_date':current_date})
 
         else:
             messages.warning(request, 'Find train first to get available train')
@@ -86,8 +86,27 @@ class Bookings(View):
 
                 fare_each = ClassType.objects.get(name=ctype)
 
-                return render(request, 'booking.html', {'train':train, 'source':source, 'destination':destination, 'date':date, 'departure':departure, 'arrival':arrival, 'tp':tp, 'pa':pa, 'pc':pc, 'ctype':ctype, 'total_fare':total_fare, 'fare_each':fare_each})
+                # this is for booking seat according to train seat capacity
+
+                ticket = Ticket.objects.filter(train_name=train, travel_date=date)
+                # if ticket.count() < 30:
+                #     print(ticket.count())
+                available_seat = 30 - ticket.count()
+                print(available_seat)
+                tp = int(tp)
+                if available_seat >= tp:
+
+                    return render(request, 'booking.html', {'train':train, 'source':source, 'destination':destination, 'date':date, 'departure':departure, 'arrival':arrival, 'tp':tp, 'pa':pa, 'pc':pc, 'ctype':ctype, 'total_fare':total_fare, 'fare_each':fare_each})
+                else:
+                    messages.warning(request, f"sorry! {available_seat} seat is available for this train. Try again!")
+                    return redirect('home')
+                
+                # this is for booking seat according to train seat capacity (end)
+                # else:
+                #     messages.warning(request, "sorry! enough seat is not available for this train. Try again!")
+                #     return redirect('home')
             else:
+                messages.warning(request, "login first to book train")
                 return redirect('login')
         else:
             messages.warning(request, 'find a train first!')
@@ -228,40 +247,6 @@ class Tickets(View):
                 return redirect('booking_history')
         else:
             return redirect('login')
-
-
-# create pdf view
-
-# class TicketPdf(View):
-#     def get(self, request, pk, qk):
-#         user = request.user
-#         if user.is_authenticated:
-#             bookings = Booking.objects.get(id=pk)
-#             if user == bookings.user:
-#                 ticket = Ticket.objects.filter(booking=bookings)
-
-#                 template_path = 'ticket_pdf.html'
-#                 context = {'ticket':ticket}
-#                 # Create a Django response object, and specify content_type as pdf or csv
-#                 response = HttpResponse(content_type='application/pdf')
-#                 response['Content-Disposition'] = 'filename="ticket.pdf"'
-#                 # find the template and render it.
-#                 template = get_template(template_path)
-#                 html = template.render(context)
-
-#                 # create a pdf
-#                 pisa_status = pisa.CreatePDF(
-#                 html, dest=response)
-#                 # if error then show some funy view
-#                 if pisa_status.err:
-#                     return HttpResponse('We had some errors <pre>' + html + '</pre>')
-#                 return response
-
-#             else:
-#                 messages.warning(request, 'Invalid booking id!')
-#                 return redirect('booking_history')
-#         else:
-#             return redirect('login')
 
 
 # cancel booking view
