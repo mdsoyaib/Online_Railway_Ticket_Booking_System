@@ -53,10 +53,8 @@ class AvailableTrain(View):
                 source = Station.objects.get(pk=rfrom)
                 destination = Station.objects.get(pk=to)
                 class_type = ClassType.objects.get(pk=ctype)
-
-                current_date = datetime.now(timezone.utc)
                 
-                return render(request, 'available_train.html', {'search': search, 'source':source, 'destination':destination, 'class_type':class_type, 'current_date':current_date})
+                return render(request, 'available_train.html', {'search': search, 'source':source, 'destination':destination, 'class_type':class_type})
 
         else:
             messages.warning(request, 'Find train first to get available train')

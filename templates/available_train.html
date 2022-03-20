@@ -63,7 +63,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                            {% for search in search %}
+                        {% for search in search %}   
                         <tr>
                             <th scope="row"><input type="hidden" name="train" value="{{search.name}}">{{search.name}}</th>
                             <td><input type="hidden" name="departure" value="{{search.departure_time}}">{{search.departure_time}}</td>
@@ -72,10 +72,14 @@
                             <td><input type="hidden" name="tp" value="{{request.GET.pa|passengers:request.GET.pc}}">{{request.GET.pa|passengers:request.GET.pc}}</td>
                             <td><input type="hidden" name="total_fare" value="{{request.GET.pa|passengers:request.GET.pc|multiply:class_type.price}}">{{request.GET.pa|passengers:request.GET.pc|multiply:class_type.price}}</td>
                             <td>
-                                {{request.GET.date|add:search.departure_time}}
-                                {{request.GET.date|add:search.departure_time|book:current_date}}
+                                <!-- {{request.GET.date|add:search.departure_time}} -->
+                                {% with show=request.GET.date|book:search.departure_time %}
+                                {% if show %}
                                 <button type="submit" class="btn btn-success pl-4 pr-4 pt-2 pb-2 text-white">Book</button>
-               
+                                {% else %}
+                                <span class="text-danger">The train left!</span>
+                                {% endif %}
+                                {% endwith %}
                                 
                             </td>
                         </tr>
