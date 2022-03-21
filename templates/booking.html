@@ -21,9 +21,9 @@
                             <h5 class="pb-4 mx-auto text-primary">Personal Info</h5>
                             <h6>User Name: {{user.first_name}} {{user.last_name}}</h6>
                             <label for="email"><h6>Email:</h6></label>
-                            <input class="form-control mb-2" type="email" name="email" id="email" value="{{user.email}}">
+                            <input class="form-control mb-2" type="email" name="email" id="email" value="{{user.email}}" required>
                             <label for="email"><h6>Phone Number:</h6></label>
-                            <input class="form-control" type="text" name="phone" id="phone" value="{{user.phone}}">
+                            <input class="form-control" type="text" name="phone" id="phone" value="{{user.phone}}" required>
                         </div>
                         <!-- booking info part -->
                         <div class="col-lg-6 p-1 card bookinginfo">

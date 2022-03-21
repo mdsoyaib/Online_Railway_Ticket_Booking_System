@@ -66,6 +66,7 @@ class BillingInfoAdmin(admin.ModelAdmin):
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'pay_amount', 'pay_method', 'phone', 'trxid', 'status')
+    list_filter = ('pay_method',)
     list_per_page = 10
 
 
