@@ -21,7 +21,7 @@
  
  <h4>Step by step process to run this project:</h4>
  <p>Make sure that, python is installed and you added it to the path. After installation you can check it from terminal. Write this in terminal: <br><br>
- <b>python --version</b> <i>(suggestion: always use the updated one!)</i><br><br>
+ ```python --version <i>(suggestion: always use the updated one!)</i><br><br>
  After download/clone the project open the project with VScode, PyCharm or any good IDE you have. Then open the IDE terminal and create a virtual environment. Write:<br><br>
  <b>python -m venv env</b><br><br>
  Activate the virtual environment (for windows user):<br><br>
